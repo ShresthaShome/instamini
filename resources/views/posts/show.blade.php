@@ -49,6 +49,69 @@
                 @else
                     <p>{{ $post->caption }}</p>
                 @endif
+                <hr />
+
+                <div class="d-flex mb-2">
+                    @if ($post->likes->where('user_id', auth()->id())->count() > 0)
+                        <form action="{{ route('likes.destroy', $post->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-link p-0 me-2">
+                                <i class="fas fa-heart text-danger"></i>
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('likes.store', $post->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0 me-2">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </form>
+                    @endif
+                </div>
+                <p><strong>{{ $post->likes->count() }} likes</strong></p>
+                <p class="text-muted">
+                    <small>
+                        {{ $post->created_at->format('j F Y') }}
+                    </small>
+                </p>
+
+                <hr />
+
+                <div class="comments-section" style="max-height: 300px; overflow-y: auto;">
+                    @foreach ($post->comments as $comment)
+                        <div class="d-flex mb-2">
+                            @if ($comment->user)
+                                <strong class="me-2">{{ $comment->user->username }}</strong>
+                            @else
+                                <strong class="me-2">Deleted User</strong>
+                            @endif
+
+                            <p class="mb-0">{{ $comment->comment }}</p>
+
+                            @if (auth()->id() === $comment->user_id || auth()->id() === $post->user_id)
+                                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
+                                    class="ms-auto">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-link p-0 text-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
+                <hr />
+
+                <form action="{{ route('comments.store', $post->id) }}" method="POST" class="mt-3">
+                    @csrf
+                    <div class="input-group">
+                        <input type="text" name="comment" class="form-control" placeholder="Add a comment..." required>
+                        <button type="submit" class="btn btn-outline-primary">Post</button>
+                    </div>
             </div>
         </div>
     </div>
