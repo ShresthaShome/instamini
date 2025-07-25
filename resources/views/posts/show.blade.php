@@ -9,7 +9,7 @@
             <div class="col-md-4">
                 <div class="d-flex align-items-center mb-3">
                     @if ($post->user)
-                        <img src="{{ $post->user->profile_image ? asset('storage/' . $post->user->profile_image) : 'https://via.placeholder.com/40' }}"
+                        <img src="{{ $post->user->profile_pic ? asset('storage/' . $post->user->profile_pic) : 'https://via.placeholder.com/40' }}"
                             alt="" class="rounded-circle me-3" style="width: 40px; height: 40px;">
 
                         <a href="{{ route('profile.show', $post->user->id) }}" class="text-dark text-decoration-none">
@@ -27,7 +27,7 @@
                                     <li><a href="{{ route('posts.edit', $post->id) }}" class="dropdown-item">Edit</a></li>
 
                                     <li>
-                                        <form action="{{ route('posts.destroy') }}" method="POST">
+                                        <form action="{{ route('posts.destroy', $post) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item text-danger">Delete</button>

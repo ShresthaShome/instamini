@@ -45,11 +45,11 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="profile_image" class="form-label">Profile Image</label>
-                                <input name="profile_image" type="file" id="profile_image"
-                                    class="form-control @error('profile_image') is-invalid
+                                <label for="profile_pic" class="form-label">Profile Picture</label>
+                                <input name="profile_pic" type="file" id="profile_pic"
+                                    class="form-control @error('profile_pic') is-invalid
                                 @enderror">
-                                @error('profile_image')
+                                @error('profile_pic')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>

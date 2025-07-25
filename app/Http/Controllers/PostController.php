@@ -41,7 +41,7 @@ class PostController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect('/profile' . Auth::user()->id);
+        return redirect('/profile/' . Auth::user()->id);
     }
 
 

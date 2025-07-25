@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-center">
-                <img src="{{ $user->profile_image ? asset('storage/' . $user->profile_image) : 'https://via.placeholder.com/150' }}"
-                    class="rounded-circle w-100" style="max-width: 150px;" alt="">
+                <img src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://placehold.co/150' }}"
+                    class="rounded-circle w-100" style="max-width: 150px; max-height: 150px;" alt="">
             </div>
 
             <div class="col-md-9">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h5>{{ $user->name }}</h5>
+                    <h5 style="font-weight: 600">{{ $user->name }}</h5>
                     <p>{{ $user->bio }}</p>
                 </div>
             </div>

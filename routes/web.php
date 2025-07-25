@@ -11,6 +11,10 @@ Route::get('/', [PostController::class, 'index'])
     ->middleware('auth')
     ->name('home');
 
+Route::get('/home', function () {
+    return redirect('/');
+})->name('home');
+
 Auth::routes();
 
 
